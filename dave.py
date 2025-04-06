@@ -14,13 +14,13 @@ crop_y1 = 155  # Top
 vertical_offset = -7.8  # 🔥 Move whole address 25 points lower
 # =================
 
-folder = "/data"
+folder = "data"
 files = os.listdir(folder)
-files = [folder + f for f in files]
 
-for doc_without in files:
+for curr in files:
     # Step 1: Open 'without.pdf' and redact old "Deutschland"
-    #doc_without = fitz.open("without.pdf")
+    withoudpdf_path = f"{folder}/{curr}"
+    doc_without = fitz.open(withoudpdf_path)
     page_without = doc_without[0]
 
     # Find and redact old "Deutschland"
@@ -87,7 +87,7 @@ for doc_without in files:
     output.add_page(without_page)
 
     # Step 5: Save final output
-    final_path = f"{doc_without}_NEW.pdf"
+    final_path = f"cleaned/{curr}"
     with open(final_path, "wb") as f:
         output.write(f)
 
